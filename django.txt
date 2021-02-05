@@ -1,0 +1,40 @@
+** Big Picture
+
+    Objectives
+1. Learn about MVC
+2. Understand the benefits of an MVC/MTV framework
+3. Our strategy for covering Django
+4. Create a virtual environment for our Django projects
+
+Seperating Concerns
+    Django is a Web-Development framework, design to handle large scale applications - and in service of handling potentially large projects, we will be separating our code into files with very specific purposes. Django will separate out into separate files:
+        Routes (expected requests)
+        Functions associated with those routes (how our server responds)
+        Database interaction (storing, retrieving data from database)
+        Templates (what the user interacts with)
+    Django further divides an application into individual apps that work together as part of one whole project.
+
+MTV (or MVC)
+    One of the most popular patterns for organizing code is one known as MVC: Model-View-Controller. Django's pattern, MTV: Model-Template-View, is very similar. Here's a basic breakdown of responsibilities:
+    Model           Model           May build database tables
+                                    Handles logic that relies on data
+                                    Interfaces with the database
+    Template        View            HTML page that gets served to the client
+                                    May contain some logic to be handled by a template engine
+    View            Controller      Recieves incoming requests
+                                    Minimal logic
+                                    Calls on models to aggregate/process data
+                                    Determines appropriate response 
+
+
+
+
+** Creating a Django Project
+
+    Objectives
+1. Create a virtual environment for all Django projects
+2. Practice the steps for creating a Django project with a single app 
+
+
+
+

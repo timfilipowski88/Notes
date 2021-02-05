@@ -1,0 +1,209 @@
+ERD LESSONS
+
+    Overview
+1. What is a database?
+2. What is important to remember about database design?
+3 What is an ERD?
+4. Our strategy for covering databases before incorporating them into our projects.
+
+1. What is a database?
+    A collection of organized information that can easily be accessed, managed, and updated. 
+
+2. What is important to remember about database design?
+    One of the most imporant things about database design is organizing your data in a way that minimizes repetition.
+
+3 What is an ERD?
+    ERD is short for Entity Relationship Diagram which is a visual blueprint for how the database looks and behaves. An ERD is a map of the structuree of how we want to store our data, and SQL is the language we use to manipulate date as per the relationships we defined in our ERD.
+
+4. Our strategy for covering databases before incorporating them into our projects.
+    Learning database design first will help us visualize how our relational databases look, making it much easier to pick up the actual SQL syntax. ERD is a process of laying out your tables and establishing relationships between them, making your data relational. 
+
+
+
+DATABASE DESIGN
+
+    Objectives
+1. What is database normalization, and why is it important?
+
+    Main topics for database design 
+Throughout the overall concepts they all point to one ver simple thing -- Don't Repeat Data --
+    Database Relationships
+        One to One
+        One to Many
+        Many to Many
+    Three (3) Forms of Normalization
+    MySQL Workbench
+    Data Types
+
+When we normalize our tables we don't repeat data, helping with storage efficiency. 
+    -- Id's -- and --Foreign Keys -- are the glue between our tables. By seperating our data out into different tables we make them more modular. SQL then can build a custom table for the tast at hand. The better the modularity, the better the database. 
+
+
+
+ONE TO ONE
+
+    Objectives
+1. What is a one-to-one relationship in the context of databases?
+2. What is a foreign key, and what is it used for?
+3. What are some examples of one-to-one relationships?
+
+1. What is a one-to-one relationship in the context of databases?
+    An example of a one to one relationship is a customer address. Each customer only has one address but because the address contains multiple pieces of data(street, city, state) it can fleshed out into its own table and removed from the customers table. Each table has a unique ID on each row to access it.
+
+2. What is a foreign key, and what is it used for?
+    Now the the customers table will get a Foreign ID for the addresses table. This allows the customers table to ajoin the addresses table to it. 
+
+3. What are some examples of one-to-one relationships?
+    Customers and Credit Cards - Every Customer has a credit card, every Credit Card belongs to a customer. 
+    User and Email - Every User has one Email Address, every Email Address has one User.
+    Product and Image - Every Product has an Image, every image is of a product. 
+
+
+
+ONE TO MANY 
+
+    Objectives
+1. What is a one to many relationship?
+2. What are some examples of one to many relationships?
+3. What is the difference between a Foreign Key and a Primary ID?
+4. In a one to many relationship, which table contains the Foreign Key?
+
+1. What is a one to many relationship?
+    Since one customer can have multiple Orders we call this a One to Many Relationship. In this case the Orders table has multiple times that it references the Customers table via a Foriegn Key.
+
+2. What are some examples of one to many relationships?
+    Messages and Comments - One Comment belongs to one Message, but one Message can have many Comments.
+    States and Cities - One City is only in one State, but one State can have many Cities.
+    Customers and Orders - One Order only has one Customer, but one Customer can have many Orders. 
+
+3. What is the difference between a Foreign Key and a Primary ID?
+    The Primary ID is the id in each table for each row of data. The Foreign Key is the Primary ID being referenced by a different table. 
+
+4. In a one to many relationship, which table contains the Foreign Key?
+    The Many table will hold the Foreign key. 
+
+
+
+MANY TO MANY 
+
+1. What is a many to many relationship?
+2. What are some examples of many to many relationships?
+3. What is a joiner table and how is it use?
+
+1. What is a many to many relationship?
+    A many to many relationship is where many of something may contain many of something else. 
+
+2. What are some examples of many to many relationships?
+    Objectives
+    Orders and Items - A single customer many have multiple orders and each order may have multiples items. The customer to orders is one to many, the orders to items is many to many. 
+    Users and Interests - One User can have many Interests, one Interests can be applied to many Users.
+    Actors and Movies - One Movie can have many Actors, one Actor can be in many movies. 
+    Businesses and Cities - One Business can be in many Cities, One City can have many Businesses.
+
+3. What is a joiner table and how is it use?
+    A joiner table in the above example connects the order id with the item id. There many be multiple repitition of both in the joiner table. Any time you have a many to many it will require a joiner table. 
+
+
+
+NORMALIZATION
+    Objectives
+1. What is database normalization, and what is its ultimate goal?
+2. How can database normalization be taken too far?
+3. What are the three forms of database normalization?
+
+1. What is database normalization, and what is its ultimate goal?
+    It is a convention for splitting large tables of data into smaller separate tables with the primary goal being to Not Repeat Data. If we want to store a user's email address, we'd want to store it in only one place. Then, if we ever need to refer to it again, we'd simply use the ID. The ID will never change, so even if we update the user's email address, none of the other connections we defined in our database will be damaged. Neat!
+
+2. How can database normalization be taken too far?
+    An extreme example would be to normalize all parts of the address system. Since techinally you could define each street number, name, street name, apt #, house #, city, state, zipcode, etc, etc, etc. and go way overboard on your normalization. This is inefficient for many smaller projects. 
+
+3. What are the three forms of database normalization?
+    1. Each Column in your table can only have one value. 
+        ex. You should not have an address column in your table that lists the address, city, state, and zip, all seperated by commas. This would be better off with individual columns for each piece. 
+    2. Each Column in your table that is not a Key(Foreign or Primary) must have unique values.
+        ex. If you have a movies table with a categories column, you should not have a category repeated more than once. In this case since Comedy, Action, Drama will be repeated, they need to be moved to thier own table and given keys. Then the key will be able to repeat. 
+    3. You cannot have a non-key column that is dependent on another non-key column.
+        ex. If you have a books table with Columns publisher_name and publisher_address, the publisher_address and publisher_name should be seperated into a seperate table and linked to books with a Foreign Key. The publisher_address is dependenton the publisher_name and neither Column is a Key Column. 
+
+
+
+** MySQL Workbench
+  
+    Objectives
+1.  Introduction to MySQL Workbench
+    We use MySQL Workbench becuase it let's us map out our data tables via a GUI and also allows us to write SQL Queries.
+
+
+
+** Conventions
+
+    Objectives
+1. Familiarity with database conventions.
+   Down the line, you may find yourself working with a company that has set up their database conventions a little bit differently, but these are guidelines that we feel are best for this course.  When you do things in ORM(Object Relational Mapping) or in Ruby on Rails, it becomes extremely important that we follow these naming conventions. 
+   
+   Guidelines 
+1. make the table name plural and ALL lowercase - make it plural(ex. users, leads, sites, clients, chapters, courses, modules)
+2. use "id" as the primary key - name it id(also make it auto-incremented)
+3. name foreign keys with singular_table_name_id when referencing to a primary key in another table name it [singular name of the table you're referring to]_id (ex. user_id, lead_id, site_id, client_id, chapter_id, course_id, module_id)
+4. use created_at and updated_at as columns for the timestamp in EVERY table you create. 
+
+
+
+** Data Types
+
+    Objectives
+1. Familiarity with the different types of data that can be stored in MySQL and when to use each.
+    The following are they data types you will be using 95% of the time. Although there are quite a few other data types that you can use, focus on these for now.
+
+    Simple Data Types:
+VARCHAR(number of characters)
+    Used to store non-numeric values that can be up to 255 characters. It is called VARCHAR because it can store a variable number of characters and will only use the space required for each record that is stored in the database. VARCHAR should be used for values with different character lengths like an email, first_name, or last_name.
+CHAR(number of characters)
+    Also used to store non-numeric values, however, it will use up all the space for the set number of characters regardless of what value is added. For instance, if I set CHAR(15), and try to store the value "Coding", it will use up the equivalent of 15 characters even though "Coding" is only 6 characters long. CHAR is good to use for things that will always be a given number of characters. Char would work well for something like a state_abbreviation.
+INT
+    Used to store Integers.
+    The columns that you will find mostly using the INT are things like a unique identifier for each table. The majority of rows in a table will not exceed 2.1 billion records. INT is good to use for most normal number values like a phone_number or a zip_code.
+    Unsigned(positive numbers only) - can store numerical values from 0 up to 4294967295
+    Signed(positive and negative numbers) - can store numberical values from -2147483648 up to 2147483647
+BIGINT
+    BIGINT would be used for columns that would need to store huge numbers. In most cases, you wouldn't need BIGINT, but you wanted to store something like a Facebook id when using Facebook's API, since they have over a billion users the id will need to be a data type of BIGINT. 
+    Unsigned(positive numbers only) - can store numerical values from 0 up to 18446744073709551615
+    Signed(positive and negative numbers) - can store numberical values from -9223372036854775808 to 9223372036854775807
+TINYINT
+    TINYINT would be good to use for numbers that will be relatively small. A good example of something that would use a TINYINT is user level identifier (0 - inactive user, 1 - active user, 9 - admin).
+    Unsigned - can store numerical values from 0 to 255
+    Signed - can store numerical values from -128 to 127
+FLOAT
+    Used to store floating point numbers(numbers that need to have decimal places). An example column for this would be like an item_cost.
+TEXT
+    Used to store a large amount of text, like a description, message, or comment. Use this for any text that VARCHAR() is too small to handle.
+DATETIME
+    Used to store a date and time in the format YYYY-MM-DD hh:mm:system
+
+    
+
+** Simple Blog
+ 
+    Objectives
+1. How do we decide how to design our databases? 
+2. What are the steps to create an ERD in MySQL Workbench?
+
+1. How do we decide how to design our databases? 
+    Based off of wireframe of website. 
+
+2. What are the steps to create an ERD in MySQL Workbench?
+    1. Look at wireframe and determine what collections are needed. Which tables do we want? Which data do we want to store?
+    2. Create the tables needed in MySQL Workbench. Pay attention to adding ID with auto incriment, created_at, and updated_at for the tables.
+    3. Then add the relationships between the tables. Be sure to follow proper normalization. 
+
+
+
+** Likes
+
+    Objectives
+1. Gain familiarity with designing ERD's. 
+
+
+
+
+
